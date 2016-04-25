@@ -9,10 +9,10 @@
         markerOptions: {
           draggable: true
         }
-        //details: "#id_location"
       })
-      .bind("geocode:result", function(event, result){
-        console.log("Result: " + result.formatted_address + result.lat + ',' + result.lng);
+      .bind("geocode:result", function(event, result) {
+        var coordinates = result.geometry.location.lat() + ',' + result.geometry.location.lng();
+        $('#id_location').val(coordinates);
       })
       .bind("geocode:error", function(event, status){
         console.log("ERROR: " + status);
