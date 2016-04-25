@@ -20,8 +20,6 @@ class LocationField(CharField):
 
         if self.base_field == '':
             raise ImproperlyConfigured()
-            #print('Foo')
-            #kwargs['separator'] = self.separator
         return name, path, args, kwargs
 
     def formfield(self, **kwargs):
