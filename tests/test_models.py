@@ -10,7 +10,7 @@ Tests for `dj-places` models module.
 
 from django.test import TestCase
 
-from djplaces import models
+from djplaces.fields import LocationField
 
 
 class TestDjplaces(TestCase):
