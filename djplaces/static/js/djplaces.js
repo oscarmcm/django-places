@@ -1,21 +1,23 @@
+var dj = jQuery.noConflict();
 
-$(document).ready(function() {
+dj(document).ready(function() {
 
   var options = {
         map: "#map_location",
         mapOptions: { zoom: 10 },
-        markerOptions: { draggable: true }
+        markerOptions: { draggable: true },
+        types: ["geocode", "establishment"],
       },
-      $geocomplete = $("#id_place");
+      geocomplete = dj("#id_place");
 
-  if ( $('#id_location').val() ) {
-    options.location = $('#id_location').val()
+  if ( dj('#id_location').val() ) {
+    options.location = dj('#id_location').val()
   }
 
-  $geocomplete
+  geocomplete
     .geocomplete(options)
     .bind("geocode:result", function(event, result) {
-      $('#id_location').val(result.geometry.location.lat() + ',' + result.geometry.location.lng());
+      dj('#id_location').val(result.geometry.location.lat() + ',' + result.geometry.location.lng());
     })
     .bind("geocode:error", function(event, status){
       console.log("ERROR: " + status);
@@ -24,7 +26,7 @@ $(document).ready(function() {
       console.log("Multiple: " + results.length + " results found");
     })
     .bind("geocode:dragged", function(event, latLng){
-      $('#id_location').val(latLng.lat() + ',' + latLng.lng());
+      dj('#id_location').val(latLng.lat() + ',' + latLng.lng());
     });
 
 });
