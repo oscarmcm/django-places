@@ -6,12 +6,8 @@ A django app for store places with autocomplete function and a related map to th
 Badges
 ---------
 
-.. image:: https://badge.fury.io/py/dj-places.png
-    :target: https://badge.fury.io/py/dj-places
-
-.. image:: https://travis-ci.org/oscarmcm/django-places.png?branch=master
-    :target: https://travis-ci.org/oscarmcm/django-places
-
+[![PyPI version](https://badge.fury.io/py/dj-places.svg)](https://badge.fury.io/py/dj-places)
+[![Build Status](https://travis-ci.org/oscarmcm/django-places.svg?branch=master)](https://travis-ci.org/oscarmcm/django-places)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d6433fc7fc384f63b9f41fc251ee70b1)](https://www.codacy.com/app/om-cortez-2010/django-places?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=oscarmcm/django-places&amp;utm_campaign=Badge_Grade)
 
 Quickstart
