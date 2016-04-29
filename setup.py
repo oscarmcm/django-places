@@ -37,8 +37,8 @@ if sys.argv[-1] == 'tag':
     os.system("git push --tags")
     sys.exit()
 
-readme = open('README.rst').read()
-history = open('HISTORY.rst').read().replace('.. :changelog:', '')
+readme = open('README.md').read()
+history = open('HISTORY.md').read().replace('.. :changelog:', '')
 
 setup(
     name='dj-places',
@@ -47,7 +47,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author='Oscar Cortez',
     author_email='om.cortez.2010@gmail.com',
-    url='https://github.com/oscarmcm/dj-places',
+    url='https://github.com/oscarmcm/django-places',
     packages=[
         'djplaces',
     ],
@@ -56,7 +56,7 @@ setup(
     ],
     license="BSD",
     zip_safe=False,
-    keywords='dj-places',
+    keywords='django geocomplete google maps places',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Framework :: Django',
