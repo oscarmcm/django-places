@@ -1,23 +1,20 @@
-=============================
+
 django-places
 =============================
-A django app for store places with autocomplete function and a related map to the selected place.
+
+A Django app for store places with autocomplete function and a related map to the selected place.
 
 Badges
 ---------
 
-.. image:: https://badge.fury.io/py/dj-places.png
-    :target: https://badge.fury.io/py/dj-places
-
-.. image:: https://travis-ci.org/oscarmcm/django-places.png?branch=master
-    :target: https://travis-ci.org/oscarmcm/django-places
-
+[![PyPI](https://badge.fury.io/py/dj-places.png)](https://badge.fury.io/py/dj-places)
+[![Travis-ci](https://travis-ci.org/oscarmcm/django-places.png?branch=master)](https://travis-ci.org/oscarmcm/django-places)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d6433fc7fc384f63b9f41fc251ee70b1)](https://www.codacy.com/app/om-cortez-2010/django-places?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=oscarmcm/django-places&amp;utm_campaign=Badge_Grade)
 
 Quickstart
 ----------
 
-Install dj-places and add it to your installed apps::
+Install dj-places and add it to your installed apps:
 
     $ pip install dj-places
 
@@ -27,14 +24,14 @@ Install dj-places and add it to your installed apps::
     	...
     )
 
-Add in your project settings the following values::
+Add in your project settings the following values:
 
 	JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'
  	GEOCOMPLETE_URL = '//cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.min.js'
  	GOOGLE_PLACES_URL = '//maps.googleapis.com/maps/api/js?libraries=places'
 
 
-Then use it in a project::
+Then use it in a project:
 
     from djplaces.fields import LocationField
     place = models.CharField(max_length=250)
@@ -53,8 +50,6 @@ Running Tests
 --------------
 
 Does the code actually work?
-
-::
 
     source <YOURVIRTUALENV>/bin/activate
     (myenv) $ pip install -r requirements-test.txt
