@@ -38,7 +38,7 @@ if sys.argv[-1] == 'tag':
     sys.exit()
 
 readme = open('README.md').read()
-history = open('HISTORY.md').read().replace('.. :changelog:', '')
+history = open('CHANGELOG.md').read()
 
 setup(
     name='dj-places',
