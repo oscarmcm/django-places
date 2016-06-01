@@ -37,6 +37,11 @@ Then use it in a project:
     place = models.CharField(max_length=250)
     location = LocationField(base_field='place')
 
+Demo
+------
+
+![](http://g.recordit.co/hZabhhYLHS.gif)
+
 TODO-LIST
 --------
 
