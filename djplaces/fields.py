@@ -10,10 +10,14 @@ from .widgets import LocationWidget
 class LocationField(CharField):
     description = _("A geoposition field (latitude and longitude)")
 
-    def __init__(self, base_field=None, *args, **kwargs):
+    def __init__(self, verbose_name=None, name=None,
+                 base_field=None, *args, **kwargs):
+        self.verbose_name = verbose_name
+        self.name = name
         self.base_field = base_field
         kwargs['max_length'] = 63
-        super(LocationField, self).__init__(*args, **kwargs)
+        super(LocationField, self).__init__(
+            verbose_name, name, *args, **kwargs)
 
     def deconstruct(self):
         name, path, args, kwargs = super(LocationField, self).deconstruct()
