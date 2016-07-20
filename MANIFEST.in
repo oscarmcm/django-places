@@ -2,4 +2,4 @@ include AUTHORS.md
 include CHANGELOG.md
 include LICENSE
 include README.md
-recursive-include djplaces *.html *.png *.gif *js *.css *jpg *jpeg *svg *py
+recursive-include djplaces *.html *js *.css *py

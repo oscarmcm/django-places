@@ -1,6 +1,15 @@
 # Change Log
+
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
+
+
+## [v1.0.4](https://github.com/oscarmcm/django-places/tree/v1.0.3) (2016-07-20)
+[Full Changelog](https://github.com/oscarmcm/django-places/compare/v1.0.3...v1.0.4)
+
+**Fixed bugs:**
+
+- Use Django admin jQuery
 
 ## [v1.0.3](https://github.com/oscarmcm/django-places/tree/v1.0.3) (2016-06-01)
 [Full Changelog](https://github.com/oscarmcm/django-places/compare/v1.0.2...v1.0.3)
@@ -24,5 +33,3 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fixes \#1 Geocomplete is not a function [\#2](https://github.com/oscarmcm/django-places/pull/2) ([oscarmcm](https://github.com/oscarmcm))
 
 ## [v1.0.0](https://github.com/oscarmcm/django-places/tree/v1.0.0) (2016-04-28)
-
-- First release on [PyPI.](https://pypi.python.org/pypi/dj-places)

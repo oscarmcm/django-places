@@ -24,12 +24,9 @@ Install dj-places and add it to your installed apps:
     	...
     )
 
-Add in your project settings the following values:
+Add your maps api key in your settings ( [read more here](https://developers.google.com/maps/documentation/javascript/3.exp/reference) ):
 
-	JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'
- 	GEOCOMPLETE_URL = '//cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.min.js'
- 	GOOGLE_PLACES_URL = '//maps.googleapis.com/maps/api/js?libraries=places'
-
+    MAPS_API_KEY='YourAwesomeUltraSecretKey'
 
 Then use it in a project:
 
@@ -47,7 +44,6 @@ TODO-LIST
 
 * [ ] Write some test ASAP!
 * [ ] Support Inline Admin
-* [ ] Use Django Admin Jquery
 * [ ] Set custom zoom map value
 * [ ] Custom property for lat and lng values
 
