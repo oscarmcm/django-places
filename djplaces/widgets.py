@@ -21,9 +21,10 @@ class LocationWidget(widgets.TextInput):
         return forms.Media(
                     css={'all': ('css/djplaces.css',)},
                     js=(
+                        '//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js', # NOQA
                         '//maps.googleapis.com/maps/api/js?key='+ settings.MAPS_API_KEY +'&libraries=places',  # NOQA
+                        '//cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.js',  # NOQA
                         'js/djplaces.js',
-                        '//cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.min.js'  # NOQA
                         )
                 )
     media = property(_media)
