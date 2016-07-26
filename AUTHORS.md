@@ -5,9 +5,9 @@ Credits
 Development Lead
 ----------------
 
-* Oscar Cortez <om.cortez.2010@gmail.com>
+* [Oscar Cortez](https://github.com/oscarmcm)
 
 Contributors
 ------------
 
-None yet. Why not be the first?
+* [Darwing Medina](https://github.com/darwing1210)

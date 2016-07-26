@@ -3,8 +3,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v1.0.5](https://github.com/oscarmcm/django-places/tree/v1.0.5) (2016-07-26)
+[Full Changelog](https://github.com/oscarmcm/django-places/compare/v1.0.4...v1.0.5)
 
-## [v1.0.4](https://github.com/oscarmcm/django-places/tree/v1.0.3) (2016-07-20)
+**Merged pull requests:**
+
+Add own jquery to avoid conflicts and be able to used in admin and templates [\#5](https://github.com/oscarmcm/django-places/pull/5)([darwing1210](https://github.com/darwing1210))
+
+## [v1.0.4](https://github.com/oscarmcm/django-places/tree/v1.0.4) (2016-07-20)
 [Full Changelog](https://github.com/oscarmcm/django-places/compare/v1.0.3...v1.0.4)
 
 **Fixed bugs:**
