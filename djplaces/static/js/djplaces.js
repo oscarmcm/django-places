@@ -1,9 +1,6 @@
+var dj = jQuery.noConflict();
 
-if (!$) {
-  var $ = jQuery = django.jQuery;
-}
-
-$(function() {
+dj(function() {
 
   var options = {
     map: "#map_location",
@@ -11,16 +8,16 @@ $(function() {
     markerOptions: { draggable: true },
     types: ["geocode", "establishment"],
   },
-  geocomplete = $("#id_place");
+  geocomplete = dj("#id_place");
 
-  if ( $('#id_location').val() ) {
-    options.location = $('#id_location').val()
+  if ( dj('#id_location').val() ) {
+    options.location = dj('#id_location').val()
   }
 
   geocomplete
     .geocomplete(options)
     .bind("geocode:result", function(event, result) {
-      $('#id_location').val(result.geometry.location.lat() + ',' + result.geometry.location.lng());
+      dj('#id_location').val(result.geometry.location.lat() + ',' + result.geometry.location.lng());
     })
     .bind("geocode:error", function(event, status){
       console.log("ERROR: " + status);
@@ -29,7 +26,7 @@ $(function() {
       console.log("Multiple: " + results.length + " results found");
     })
     .bind("geocode:dragged", function(event, latLng){
-      $('#id_location').val(latLng.lat() + ',' + latLng.lng());
+      dj('#id_location').val(latLng.lat() + ',' + latLng.lng());
     });
 
 });
