@@ -20,32 +20,29 @@ Install dj-places and add it to your installed apps:
 
     INSTALLED_APPS = (
     	...
-    	'djplaces',
+    	'places',
     	...
     )
 
 Add your maps api key in your settings ( [read more here](https://developers.google.com/maps/documentation/javascript/3.exp/reference) ):
 
-    MAPS_API_KEY='YourAwesomeUltraSecretKey'
+    PLACES_MAPS_API_KEY='YourAwesomeUltraSecretKey'
 
 Then use it in a project:
 
-    from djplaces.fields import LocationField
-    place = models.CharField(max_length=250)
-    location = LocationField(base_field='place')
+    from places.fields import PlacesField
+    location = PlacesField()
 
 Demo
 ------
 
-![](http://g.recordit.co/hZabhhYLHS.gif)
+![](http://g.recordit.co/LheQH0HDMR.gif)
 
 TODO-LIST
 --------
 
 * [ ] Write some test ASAP!
 * [ ] Support Inline Admin
-* [ ] Set custom zoom map value
-* [ ] Custom property for lat and lng values
 
 Running Tests
 --------------
@@ -59,8 +56,6 @@ Does the code actually work?
 Credits
 ---------
 
-Special thanks to [Helmy Giacoman](https://github.com/eos87) for motivating me to make this package.
-
 Tools used in rendering this package:
 
 *  [Cookiecutter](https://github.com/audreyr/cookiecutter)
@@ -71,4 +66,4 @@ Similar Projects
 ------------
 
 *  [Django Location Field](https://github.com/caioariede/django-location-field)
-*  [Django Geoposition](https://github.com/philippbosch/django-geoposition)
+*  [Django GeoPosition](https://github.com/philippbosch/django-geoposition)

@@ -1,0 +1,8 @@
+.places-widget {
+  overflow: hidden;
+}
+
+  .places-widget > div {
+    border: 1px solid #CACACA;
+    margin-top: 10px;
+  }

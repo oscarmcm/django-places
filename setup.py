@@ -5,9 +5,9 @@ import re
 import sys
 
 try:
-    from setuptools import setup
+    from setuptools import setup, find_packages
 except ImportError:
-    from distutils.core import setup
+    from distutils.core import setup, find_packages
 
 
 def get_version(*file_paths):
@@ -19,7 +19,7 @@ def get_version(*file_paths):
         return version_match.group(1)
     raise RuntimeError('Unable to find version string.')
 
-version = get_version('djplaces', '__init__.py')
+version = get_version('places', '__init__.py')
 
 if sys.argv[-1] == 'publish':
     try:
@@ -44,32 +44,29 @@ setup(
     name='dj-places',
     version=version,
     description="""A django app for store places""",
-    long_description=readme + '\n\n' + history,
     author='Oscar Cortez',
     author_email='om.cortez.2010@gmail.com',
     url='https://github.com/oscarmcm/django-places',
-    packages=[
-        'djplaces',
-    ],
+    packages=find_packages(),
+    package_data={
+        'places': [
+            'locale/*/LC_MESSAGES/*',
+            'templates/places/widgets/*.html',
+            'static/places/*',
+        ],
+    },
     include_package_data=True,
     install_requires=[
     ],
-    license="BSD",
+    license="MIT",
     zip_safe=False,
     keywords='django geocomplete google maps places',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Framework :: Django',
-        'Framework :: Django :: 1.8',
-        'Framework :: Django :: 1.9',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python',
     ],
 )

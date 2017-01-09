@@ -1,0 +1,17 @@
+<div class="places-widget" data-map-options="{{ config.map_options }}" data-marker-options="{{ config.marker_options }}">
+  <table>
+    <tbody class="places-map-detail">
+      <tr>
+        <td>{{ place.label|capfirst }}:</td>
+        <td colspan="3" id="map_place">{{ place.html }}</td>
+      </tr>
+      <tr>
+        <td>{{ latitude.label|capfirst }}:</td>
+        <td id="map_latitude">{{ latitude.html }}</td>
+        <td>{{ longitude.label|capfirst }}:</td>
+        <td id="map_longitude">{{ longitude.html }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="map_location" style="height:{{ config.map_widget_height }}px;"></div>
+</div>
