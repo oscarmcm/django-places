@@ -17,7 +17,7 @@ class PlacesField(models.Field):
     description = _("A geoposition field (latitude and longitude)")
 
     def __init__(self, *args, **kwargs):
-        kwargs['max_length'] = 63
+        kwargs['max_length'] = 255
         super(PlacesField, self).__init__(*args, **kwargs)
 
     def get_internal_type(self):
@@ -64,3 +64,4 @@ class PlacesField(models.Field):
         }
         defaults.update(kwargs)
         return super(PlacesField, self).formfield(**defaults)
+

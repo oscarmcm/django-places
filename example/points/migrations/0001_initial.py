@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='Place',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('location', places.fields.PlacesField(blank=True, max_length=63)),
+                ('location', places.fields.PlacesField(blank=True, max_length=255)),
             ],
         ),
     ]
