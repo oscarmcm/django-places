@@ -13,7 +13,6 @@ class PlacesField(forms.MultiValueField):
     }
 
     def __init__(self, *args, **kwargs):
-        self.widget = PlacesWidget()
         fields = (
             forms.CharField(label=_('place')),
             forms.DecimalField(label=_('latitude')),
@@ -21,6 +20,7 @@ class PlacesField(forms.MultiValueField):
         )
         if 'initial' in kwargs:
             kwargs['initial'] = Location(*kwargs['initial'].split(','))
+        self.widget = PlacesWidget()
         super(PlacesField, self).__init__(fields, **kwargs)
 
     def widget_attrs(self, widget):

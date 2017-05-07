@@ -11,7 +11,7 @@ if sys.version_info < (3,0):
 from decimal import Decimal
 
 default_app_config = 'places.apps.PlacesConfig'
-__version__ = '1.1.2'
+__version__ = '1.1.3'
 
 
 class Places(object):
@@ -28,10 +28,10 @@ class Places(object):
         self.longitude = Decimal(longitude)
 
     def __str__(self):
-        return "{0}, {1}, {2}".format(self.place, self.latitude, self.longitude)
+        return "%s, %s, %s" % (self.place, self.latitude, self.longitude)
 
     def __repr__(self):
-        return "Places({0})".format(self)
+        return "Places(%s)" % str(self)
 
     def __len__(self):
         return len(str(self))
