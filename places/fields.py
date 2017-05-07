@@ -33,14 +33,17 @@ class PlacesField(models.Field):
 
         matched = re.finditer(r'[-+]?\d*\.\d+|\d+', value)
         value_parts = [Decimal(x.group()) for x in matched]
+
         try:
-            latitude = value_parts[0]
+            latitude = value_parts[0] if len(value_parts) == 2 else value_parts[2]
         except IndexError:
             latitude = '0.0'
+
         try:
-            longitude = value_parts[1]
+            longitude = value_parts[1] if len(value_parts) == 2 else value_parts[3]
         except IndexError:
             longitude = '0.0'
+
         try:
             place = re.sub(r'[-+]?\d*\.\d+|\d+', '', value)[:-4]
         except:
@@ -56,7 +59,7 @@ class PlacesField(models.Field):
 
     def value_to_string(self, obj):
         value = self._get_val_from_obj(obj)
-        return smart_text(value)
+        return str(value)
 
     def formfield(self, **kwargs):
         defaults = {
@@ -64,4 +67,3 @@ class PlacesField(models.Field):
         }
         defaults.update(kwargs)
         return super(PlacesField, self).formfield(**defaults)
-

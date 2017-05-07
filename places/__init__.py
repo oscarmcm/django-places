@@ -1,8 +1,17 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
+import sys
+
+# Weird encoding python2 hack :'(
+if sys.version_info < (3,0):
+    reload(sys)
+    sys.setdefaultencoding('utf8')
+
 from decimal import Decimal
 
 default_app_config = 'places.apps.PlacesConfig'
-__version__ = '1.1.1'
+__version__ = '1.1.2'
 
 
 class Places(object):
@@ -19,10 +28,10 @@ class Places(object):
         self.longitude = Decimal(longitude)
 
     def __str__(self):
-        return "%s, %s, %s" % (self.place, self.latitude, self.longitude)
+        return "{0}, {1}, {2}".format(self.place, self.latitude, self.longitude)
 
     def __repr__(self):
-        return "Places(%s)" % str(self)
+        return "Places({0})".format(self)
 
     def __len__(self):
         return len(str(self))
