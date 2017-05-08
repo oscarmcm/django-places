@@ -11,7 +11,7 @@ if sys.version_info < (3,0):
 from decimal import Decimal
 
 default_app_config = 'places.apps.PlacesConfig'
-__version__ = '1.1.3'
+__version__ = '1.1.4'
 
 
 class Places(object):

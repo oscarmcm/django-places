@@ -19,7 +19,7 @@ class PlacesField(forms.MultiValueField):
             forms.DecimalField(label=_('longitude')),
         )
         if 'initial' in kwargs:
-            kwargs['initial'] = Location(*kwargs['initial'].split(','))
+            kwargs['initial'] = Places(*kwargs['initial'].split(','))
         self.widget = PlacesWidget()
         super(PlacesField, self).__init__(fields, **kwargs)
 
