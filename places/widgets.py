@@ -13,8 +13,8 @@ class PlacesWidget(widgets.MultiWidget):
     def __init__(self, attrs=None):
         _widgets = (
             widgets.TextInput(attrs={'data-geo': 'formatted_address', 'data-id': 'map_place'}),
-            widgets.TextInput(attrs={'data-geo': 'lat', 'data-id': 'map_latitude'}),
-            widgets.TextInput(attrs={'data-geo': 'lng', 'data-id': 'map_longitude'})
+            widgets.TextInput(attrs={'data-geo': 'lat', 'data-id': 'map_latitude', 'placeholder': _('Latitude')}),
+            widgets.TextInput(attrs={'data-geo': 'lng', 'data-id': 'map_longitude', 'placeholder': _('Longitude')})
         )
         super(PlacesWidget, self).__init__(_widgets, attrs)
 
@@ -30,9 +30,9 @@ class PlacesWidget(widgets.MultiWidget):
         context['map_widget_height'] = settings.MAP_WIDGET_HEIGHT or 500
         context['map_options'] = settings.MAP_OPTIONS or ''
         context['marker_options'] =  settings.MARKER_OPTIONS or ''
-                
+
         return context
-    
+
     class Media:
         js = (
             '//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js', # NOQA
