@@ -15,8 +15,8 @@ class PlacesField(forms.MultiValueField):
     def __init__(self, *args, **kwargs):
         fields = (
             forms.CharField(label=_('place')),
-            forms.DecimalField(label=_('latitude')),
-            forms.DecimalField(label=_('longitude')),
+            forms.DecimalField(label=_('Latitude')),
+            forms.DecimalField(label=_('Longitude')),
         )
         if 'initial' in kwargs:
             kwargs['initial'] = Places(*kwargs['initial'].split(','))
