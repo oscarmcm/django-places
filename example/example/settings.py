@@ -40,13 +40,12 @@ INSTALLED_APPS = [
     'points',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -112,4 +111,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-PLACES_MAPS_API_KEY = 'AIzaSyBS2jGczsTKS9oMjcr_OS4BV3nRcp8EgHw'
