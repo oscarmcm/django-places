@@ -60,7 +60,6 @@ TODO-LIST
 --------
 
 * [ ] Write some test ASAP!
-* [ ] Support Inline Admin
 
 Running Tests
 --------------
