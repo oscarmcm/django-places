@@ -28,7 +28,7 @@ class PlacesWidget(widgets.MultiWidget):
     def get_context(self, name, value, attrs):
         context = super(PlacesWidget, self).get_context(name, value, attrs)
         context['map_widget_height'] = settings.MAP_WIDGET_HEIGHT or 500
-        context['map_options'] = settings.MAP_OPTIONS or ''
+        context['map_options'] = settings.MAP_OPTIONS or '{"center": { "lat": 38.971584, "lng": -95.235072 }, "zoom": 10}'
         context['marker_options'] =  settings.MARKER_OPTIONS or ''
 
         return context
