@@ -1,11 +1,9 @@
-function setupDjangoPlaces(childs) {
+function setupDjangoPlaces(mapConfig, childs) {
   var marker = null;
-  var mapLocation = { lat: 38.971584, lng: -95.235072 };
-
   var searchBox = new google.maps.places.SearchBox(childs[0]);
   var latInput = childs[1];
   var lngInput = childs[2];
-  var gmap = new google.maps.Map(childs[3],{center: mapLocation, zoom: 10});
+  var gmap = new google.maps.Map(childs[3], mapConfig);
 
   if (latInput.value && lngInput.value) {
     var location = {
@@ -43,7 +41,10 @@ function setupDjangoPlaces(childs) {
 function initDjangoPlaces() {
   var widgets = document.getElementsByClassName('places-widget');
   for (var iter = 0; iter < widgets.length; iter++) {
-    setupDjangoPlaces(widgets[iter].children);
+    setupDjangoPlaces(
+      JSON.parse(widgets[iter].dataset.mapOptions),
+      widgets[iter].children
+    );
   };
 };
 
