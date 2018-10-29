@@ -1,7 +1,14 @@
 .places-widget {
   overflow: hidden;
 }
-
+  .places-widget > input:first-child {
+    display: block;
+    width: 30%;
+    margin-bottom: 10px;
+  }
+  .places-widget > input:nth-child(2) {
+    margin-right: 10px;
+  }
   .places-widget > div {
     border: 1px solid #CACACA;
     margin-top: 10px;

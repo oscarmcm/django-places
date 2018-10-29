@@ -1,35 +1,47 @@
-var dj = jQuery.noConflict();
+function initDjangoPlaces() {
+  var input = document.getElementById('id_location_0');
+  var marker = null;
+  var mapLocation = { lat: 38.971584, lng: -95.235072 };
+  var searchBox = new google.maps.places.SearchBox(input);
+  var latInput = document.getElementById('id_location_1');
+  var lngInput = document.getElementById('id_location_2');
 
-dj(function() {
-  setTimeout(function() {
-  var mapElement = dj("#map_location");
-  var mapInput = dj("[data-id='map_place']");
-  var options = {
-    map: mapElement,
-    mapOptions: dj(".places-widget").data("mapOptions") ? dj(".places-widget").data("mapOptions") : { zoom: 10 },
-    markerOptions: dj(".places-widget").data("markerOptions") ? dj(".places-widget").data("markerOptions") : { draggable: true },
-    types: ["geocode", "establishment"],
-    location: mapInput && mapInput.val().length > 0 ? [dj("[data-id='map_latitude']").val(), dj("[data-id='map_longitude']").val()] : false,
-  },
-  geocomplete = mapInput;
+  var gmap = new google.maps.Map(
+    document.getElementById('map_location'),
+    {center: mapLocation, zoom: 10}
+  );
 
-  geocomplete
-    .geocomplete(options)
-    .bind("geocode:result", function(event, result) {
-      dj("[data-id='map_latitude']").val(result.geometry.location.lat());
-      dj("[data-id='map_longitude']").val(result.geometry.location.lng());
-    })
-    .bind("geocode:error", function(event, status){
-      console.log("ERROR: " + status);
-    })
-    .bind("geocode:multiple", function(event, results){
-      console.log("Multiple: " + results.length + " results found");
-    })
-    .bind("geocode:dragged", function(event, latLng){
-      dj("[data-id='map_latitude']").val(latLng.lat());
-      dj("[data-id='map_longitude']").val(latLng.lng());
+  if (latInput.value && lngInput.value) {
+    var location = {
+      lat: parseFloat(latInput.value),
+      lng: parseFloat(lngInput.value)
+    }
+    marker = new google.maps.Marker({position: location, map: gmap});
+    gmap.setCenter(location);
+    gmap.setZoom(16);
+  };
+
+  searchBox.addListener('places_changed', function () {
+    var places = searchBox.getPlaces();
+
+    if (places.length == 0) {
+      return;
+    }
+    places.forEach(function (place) {
+      if (!place.geometry) {
+        console.log('Returned place contains no geometry');
+        return;
+      }
+      if (marker) {
+        marker.setMap(null)
+      };
+      marker = new google.maps.Marker({position: place.geometry.location, map: gmap});
+      document.getElementById('id_location_1').value = place.geometry.location.lat();
+      document.getElementById('id_location_2').value = place.geometry.location.lng();
+      gmap.setCenter(place.geometry.location);
+      gmap.setZoom(16);
     });
+  });
+}
 
-  },500)
-
-});
+google.maps.event.addDomListener(window, 'load', initDjangoPlaces);
