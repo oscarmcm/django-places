@@ -35,9 +35,7 @@ class PlacesWidget(widgets.MultiWidget):
 
     class Media:
         js = (
-            '//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js', # NOQA
-            '//maps.googleapis.com/maps/api/js?key='+ settings.MAPS_API_KEY +'&libraries=places',  # NOQA
-            '//cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.js',  # NOQA
+            '//maps.googleapis.com/maps/api/js?key={}&libraries=places'.format(settings.MAPS_API_KEY),  # NOQA
             'places/places.js',
         )
         css = {
