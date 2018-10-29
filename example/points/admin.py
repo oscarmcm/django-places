@@ -1,8 +1,9 @@
 from django.conf import settings
 from django.contrib import admin
 
-from .models import Place
+from .models import Place, RoutePoint, Route
 
+@admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
     list_display = ('position_map', 'location')
 
@@ -19,4 +20,16 @@ class PlaceAdmin(admin.ModelAdmin):
             }
     position_map.allow_tags = True
 
-admin.site.register(Place, PlaceAdmin)
+
+class RoutePointInline(admin.StackedInline):
+    '''Stacked Inline View for RoutePoint model'''
+
+    model = RoutePoint
+    min_num = 1
+    extra = 1
+
+
+@admin.register(Route)
+class RouteAdmin(admin.ModelAdmin):
+    inlines = [RoutePointInline, ]
+

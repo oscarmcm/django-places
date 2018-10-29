@@ -11,3 +11,19 @@ class Place(models.Model):
 
     def __str__(self):
         return self.__unicode__()
+
+
+class Route(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
+class RoutePoint(models.Model):
+    name = models.CharField(max_length=50)
+    location = PlacesField()
+    route = models.ForeignKey(Route, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
