@@ -8,9 +8,7 @@ from . import Places
 
 
 class PlacesField(forms.MultiValueField):
-    default_error_messages = {
-        'invalid': _('Enter a valid geoposition.')
-    }
+    default_error_messages = {'invalid': _('Enter a valid geoposition.')}
 
     def __init__(self, *args, **kwargs):
         fields = (
