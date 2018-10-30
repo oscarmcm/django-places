@@ -59,8 +59,6 @@ class PlacesField(models.Field):
         return smart_text(value)
 
     def formfield(self, **kwargs):
-        defaults = {
-            'form_class': PlacesFormField
-        }
+        defaults = {'form_class': PlacesFormField}
         defaults.update(kwargs)
         return super(PlacesField, self).formfield(**defaults)
