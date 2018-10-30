@@ -51,6 +51,18 @@ This enables the following API:
     13.41156
 ```
 
+For using outside the Django Admin:
+
+```html
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+    {{ form.media }}
+</form>
+```
+Add the `{{ form.media }}` in your template.
+
 Demo
 ------
 
