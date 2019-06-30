@@ -48,7 +48,7 @@ class PlacesField(models.Field):
 
         return Places(place, latitude, longitude)
 
-    def from_db_value(self, value, expression, connection, context):
+    def from_db_value(self, value, expression, connection):
         return self.to_python(value)
 
     def get_prep_value(self, value):
