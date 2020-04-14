@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from decimal import Decimal
 
 from django.db import models
-from django.utils.six import with_metaclass
 from django.utils.encoding import smart_text
 from django.utils.translation import ugettext_lazy as _
 
@@ -13,7 +12,7 @@ from .forms import PlacesField as PlacesFormField
 
 
 class PlacesField(models.Field):
-    description = _("A geoposition field (latitude and longitude)")
+    description = _('A geoposition field (latitude and longitude)')
 
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = 255

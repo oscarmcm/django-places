@@ -1,17 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import sys
-
-# Weird encoding python2 hack :'(
-if sys.version_info < (3, 0):
-    reload(sys)
-    sys.setdefaultencoding('utf8')
-
 from decimal import Decimal
 
 default_app_config = 'places.apps.PlacesConfig'
-__version__ = '3.1.0'
+__version__ = '4.0.0'
 
 
 class Places(object):

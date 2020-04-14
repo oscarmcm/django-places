@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from django.forms import widgets
-from django.utils import six
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
@@ -34,7 +33,7 @@ class PlacesWidget(widgets.MultiWidget):
         super(PlacesWidget, self).__init__(_widgets, attrs)
 
     def decompress(self, value):
-        if isinstance(value, six.text_type):
+        if isinstance(value, str):
             return value.rsplit(',')
         if value:
             return [value.place, value.latitude, value.longitude]

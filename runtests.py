@@ -7,17 +7,14 @@ try:
     settings.configure(
         DEBUG=True,
         USE_TZ=True,
-        DATABASES={
-            "default": {
-                "ENGINE": "django.db.backends.sqlite3",
-            }
-        },
-        ROOT_URLCONF="djplaces.urls",
+        DATABASES={'default': {'ENGINE': 'django.db.backends.sqlite3',}},
+        # ROOT_URLCONF='example.urls',
+        PLACES_MAPS_API_KEY='dummyKey',
         INSTALLED_APPS=[
-            "django.contrib.auth",
-            "django.contrib.contenttypes",
-            "django.contrib.sites",
-            "djplaces",
+            'django.contrib.auth',
+            'django.contrib.contenttypes',
+            'django.contrib.sites',
+            'places',
         ],
         SITE_ID=1,
         MIDDLEWARE_CLASSES=(),
@@ -25,6 +22,7 @@ try:
 
     try:
         import django
+
         setup = django.setup
     except AttributeError:
         pass
@@ -33,8 +31,11 @@ try:
 
 except ImportError:
     import traceback
+
     traceback.print_exc()
-    raise ImportError("To fix this error, run: pip install -r requirements-test.txt")
+    raise ImportError(
+        'To fix this error, run: pip install -r requirements_test.txt'
+    )
 
 
 def run_tests(*test_args):
