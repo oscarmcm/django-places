@@ -11,7 +11,7 @@ setup(
     author='Oscar Cortez',
     author_email='om.cortez.2010@gmail.com',
     name='dj-places',
-    version='4.0.0',
+    version='5.0.0',
     install_requires=['Django>=3.0'],
     python_requires='>=3',
     keywords='django geocomplete google maps places',
