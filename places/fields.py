@@ -4,8 +4,11 @@ from __future__ import unicode_literals
 from decimal import Decimal
 
 from django.db import models
-from django.utils.encoding import smart_text
 from django.utils.translation import gettext_lazy as _
+try:
+    from django.utils.encoding import smart_text
+except ImportError:
+    from django.utils.encoding import smart_str as smart_text
 
 from . import Places
 from .forms import PlacesField as PlacesFormField
