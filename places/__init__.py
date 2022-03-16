@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from decimal import Decimal
 
 default_app_config = 'places.apps.PlacesConfig'
-__version__ = '5.0.0'
+__version__ = '5.1.0'
 
 
 class Places(object):
