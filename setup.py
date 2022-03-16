@@ -13,7 +13,7 @@ setup(
     name='dj-places',
     version='5.0.0',
     install_requires=['Django>=3.0'],
-    python_requires='>=3',
+    python_requires='>=3.6',
     keywords='django geocomplete google maps places',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
