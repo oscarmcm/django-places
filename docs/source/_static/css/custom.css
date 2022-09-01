@@ -1,0 +1,28 @@
+.sidebar-drawer {
+  background: var(--color-background-primary);
+  border-right: 0;
+}
+
+.mobile-header {
+  justify-content: end;
+}
+
+.sidebar-search-container,
+.header-left,
+.header-center {
+  display: none !important;
+}
+
+.toc-scroll {
+  border-left: 1px solid var(--color-background-border) !important;
+}
+
+.toc-tree {
+  border-left: 0;
+}
+
+.mobile-header.scrolled {
+  box-shadow: none;
+  border-bottom: 1px solid var(--color-header-border) !important;
+}
+
