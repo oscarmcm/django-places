@@ -1,28 +1,26 @@
-
-django-places
+# [django-places](https://pypi.org/project/dj-places/)
 =============================
+
+[![PyPI](https://badge.fury.io/py/dj-places.png)](https://badge.fury.io/py/dj-places)
 
 A Django app for store places with autocomplete function and a related map to the selected place.
 
-Badges
----------
-
-[![PyPI](https://badge.fury.io/py/dj-places.png)](https://badge.fury.io/py/dj-places)
-[![Travis-ci](https://travis-ci.org/oscarmcm/django-places.png?branch=master)](https://travis-ci.org/oscarmcm/django-places)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d6433fc7fc384f63b9f41fc251ee70b1)](https://www.codacy.com/app/om-cortez-2010/django-places?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=oscarmcm/django-places&amp;utm_campaign=Badge_Grade)
-
-Quickstart
+## Quickstart
 ----------
 
-Install dj-places and add it to your installed apps:
+Install `dj-places` and add it to your installed apps:
 
-    $ pip install dj-places
+```
+$ pip install dj-places
+```
 
+```
     INSTALLED_APPS = (
     	...
     	'places',
     	...
     )
+```
 
 Add the following settings and maps api key ( [read more here](https://developers.google.com/maps/documentation/javascript/reference/map) ):
 
@@ -32,6 +30,9 @@ PLACES_MAP_WIDGET_HEIGHT=480
 PLACES_MAP_OPTIONS='{"center": { "lat": 38.971584, "lng": -95.235072 }, "zoom": 10}'
 PLACES_MARKER_OPTIONS='{"draggable": true}'
 ```
+
+## Usage
+--------
 
 Then use it in a project:
 
@@ -72,13 +73,13 @@ For using outside the Django Admin:
 ```
 Remember to add the `{{ form.media }}` in your template.
 
-Demo
+## Demo
 ------
 
 ![](http://g.recordit.co/LheQH0HDMR.gif)
 
 
-Running Tests
+### Running Tests
 --------------
 
 Does the code actually work?
@@ -87,7 +88,7 @@ Does the code actually work?
     (myenv) $ pip install -r requirements_test.txt
     (myenv) $ python runtests.py
 
-Credits
+### Credits
 ---------
 
 Tools used in rendering this package:
@@ -96,8 +97,9 @@ Tools used in rendering this package:
 *  [cookiecutter-djangopackage](https://github.com/pydanny/cookiecutter-djangopackage)
 *  [jquery-geocomplete](https://github.com/ubilabs/geocomplete) (_no longer used in the project._)
 
-Similar Projects
+### Similar Projects
 ------------
 
 *  [Django Location Field](https://github.com/caioariede/django-location-field)
 *  [Django GeoPosition](https://github.com/philippbosch/django-geoposition)
+
