@@ -1,5 +1,0 @@
-Django>=3.0
-coverage>=5.1
-mock>=4.0.2
-flake8>=3.7.9
-tox>=3.14.6
