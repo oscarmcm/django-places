@@ -25,10 +25,12 @@ class PlacesField(models.Field):
         return 'CharField'
 
     def to_python(self, value):
-        if not value or value == 'None':
+        if not value or value == 'None' or value == '':
             return None
+
         if isinstance(value, Places):
             return value
+
         if isinstance(value, list):
             return Places(value[0], value[1], value[2])
 
@@ -43,6 +45,7 @@ class PlacesField(models.Field):
             longitude = value_parts[1]
         except IndexError:
             longitude = '0.0'
+
         try:
             place = ','.join(value.split(',')[:-2])
         except:

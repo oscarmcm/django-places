@@ -1,6 +1,0 @@
-include AUTHORS.md
-include CHANGELOG.md
-include LICENSE
-include README.md
-recursive-include places/templates *.html
-recursive-include places/static *.js *.css

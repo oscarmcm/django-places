@@ -4,7 +4,7 @@ from places.fields import PlacesField
 
 
 class Place(models.Model):
-    location = PlacesField(blank=True)
+    location = PlacesField()
 
     def __str__(self):
         return self.location.place

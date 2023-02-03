@@ -1,0 +1,94 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dj-places"
+dynamic = ["version"]
+description = "A django app for store places using Google Maps API"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.6"
+authors = [
+  { name = "Oscar Cortez", email = "om.cortez.2010@gmail.com" },
+]
+keywords = [
+    "django",
+    "geocomplete",
+    "google",
+    "maps",
+    "places",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "Django>=3.0",
+]
+
+[project.urls]
+Funding = "https://donate.pypi.org"
+Homepage = "http://oscarmcm.github.io/django-places/"
+Source = "https://github.com/oscarmcm/django-places/"
+Tracker = "https://github.com/oscarmcm/django-places/issues"
+
+[tool.hatch.version]
+path = "places/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/places",
+]
+
+[tool.hatch.envs.default]
+dependencies = [
+    "bumpversion==0.5.3",
+    "wheel==0.34.2",
+    "black",
+]
+
+[tool.hatch.envs.default.scripts]
+clean = ["clean-build", "clean-pyc"]
+clean-build = [
+    "rm -fr build/",
+    "rm -fr dist/",
+    "rm -fr *.egg-info",
+]
+clean-pyc = [
+    "find . -name '*.pyc' -exec rm -f {{}} +",
+    "find . -name '*.pyo' -exec rm -f {{}} +",
+    "find . -name '*~' -exec rm -f {{}} +",
+]
+lint = "flake8 djplaces tests"
+test = "python runtests.py tests"
+cov = [
+    "coverage run --source djplaces runtests.py tests",
+    "coverage report -m",
+    "coverage html",
+    "open htmlcov/index.html",
+]
+docs = [
+    "rm -f docs/dj-places.rst",
+    "rm -f docs/modules.rst",
+    "sphinx-apidoc -o docs/ djplaces",
+    "$(MAKE) -C docs clean",
+    "$(MAKE) -C docs html",
+    "open docs/_build/html/index.html",
+]
+server = "python example/manage.py runserver"
+
+[tool.hatch.envs.test]
+dependencies = [
+    "Django>=3.0",
+    "coverage>=5.1",
+    "mock>=4.0.2",
+    "flake8>=3.7.9",
+]

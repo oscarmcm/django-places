@@ -1,5 +1,4 @@
 # [django-places](https://pypi.org/project/dj-places/)
-=============================
 
 [![PyPI](https://badge.fury.io/py/dj-places.png)](https://badge.fury.io/py/dj-places)
 
@@ -22,7 +21,7 @@ $ pip install dj-places
     )
 ```
 
-Add the following settings and maps api key ( [read more here](https://developers.google.com/maps/documentation/javascript/reference/map) ):
+Add the following settings and maps api key ([read more here](https://developers.google.com/maps/documentation/javascript/reference/map)):
 
 ```python
 PLACES_MAPS_API_KEY='YourAwesomeUltraSecretKey'
@@ -77,16 +76,6 @@ Remember to add the `{{ form.media }}` in your template.
 ------
 
 ![](http://g.recordit.co/LheQH0HDMR.gif)
-
-
-### Running Tests
---------------
-
-Does the code actually work?
-
-    source <YOURVIRTUALENV>/bin/activate
-    (myenv) $ pip install -r requirements_test.txt
-    (myenv) $ python runtests.py
 
 ### Credits
 ---------

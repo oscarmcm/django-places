@@ -88,6 +88,8 @@ DATABASES = {
     }
 }
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
@@ -111,3 +113,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+PLACES_MAPS_API_KEY = ''
