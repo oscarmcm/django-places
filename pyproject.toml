@@ -69,7 +69,7 @@ clean-pyc = [
 ]
 lint = "flake8 djplaces tests"
 test = "python runtests.py tests"
-coverage = [
+cov = [
     "coverage run --source djplaces runtests.py tests",
     "coverage report -m",
     "coverage html",
@@ -83,7 +83,7 @@ docs = [
     "$(MAKE) -C docs html",
     "open docs/_build/html/index.html",
 ]
-run = "python example/manage.py runserver"
+server = "python example/manage.py runserver"
 
 [tool.hatch.envs.test]
 dependencies = [
