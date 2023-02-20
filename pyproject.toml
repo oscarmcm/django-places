@@ -46,6 +46,21 @@ path = "places/__init__.py"
 [tool.hatch.build.targets.sdist]
 include = [
     "/places",
+    "README.md",
+    "AUTHORS.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "pyproject.toml",
+]
+
+[tool.hatch.build.targets.wheel]
+include = [
+    "/places",
+    "README.md",
+    "AUTHORS.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "pyproject.toml",
 ]
 
 [tool.hatch.envs.default]
