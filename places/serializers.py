@@ -1,51 +1,60 @@
+from decimal import Decimal, InvalidOperation
+
 from rest_framework import serializers
 
+from . import Places
 
 class PlacesSerializerField(serializers.Field):
     """
-    Custom serializer field for handling a Places object represented as a string.
-    The expected format is "country,city,latitude,longitude".
+    Custom serializer field for handling a Places object.
+    The expected input format for deserialization is a dictionary with keys 'country', 'city', 'latitude', 'longitude'.
+    For serialization, it converts the Places object to this dictionary format.
     """
 
     def to_representation(self, value):
         """
         Converts the Places object to a dictionary for serialization.
         """
-        if not value:
+        if not value or not isinstance(value, Places):
             return None
 
-        parts = [part.strip() for part in str(value).split(',')]
-        if len(parts) < 4:
-            raise serializers.ValidationError("Invalid input format for Places")
-
-        return {
-            'country': parts[0],
-            'city': parts[1],
-            'latitude': parts[2],
-            'longitude': parts[3]
-        }
-
-    def to_internal_value(self, data):
-        """
-        Parses the incoming data and converts it into a format suitable for the Places object.
-        """
-        if not isinstance(data, str):
-            raise serializers.ValidationError("Expected a string input for Places")
-
-        parts = [part.strip() for part in data.split(',')]
-        if len(parts) != 4:
-            raise serializers.ValidationError("Expected format: country,city,latitude,longitude")
-
-        try:
-            country, city, latitude, longitude = parts
-            latitude = float(latitude)
-            longitude = float(longitude)
-        except ValueError:
-            raise serializers.ValidationError("Latitude and longitude must be valid numbers")
+        place_parts = value.place.split(', ')
+        country = place_parts[0] if len(place_parts) > 1 else ''
+        city = place_parts[1] if len(place_parts) > 1 else place_parts[0]
 
         return {
             'country': country,
             'city': city,
-            'latitude': latitude,
-            'longitude': longitude
+            'latitude': str(value.latitude),
+            'longitude': str(value.longitude)
         }
+
+    def to_internal_value(self, data):
+        """
+        Parses the incoming data and converts it into a Places object.
+        """
+        if not isinstance(data, dict):
+            raise serializers.ValidationError("Expected a dictionary input for Places")
+
+        country = data.get('country')
+        if not isinstance(country, str) or not country:
+            raise serializers.ValidationError({"country": "Country must be a non-empty string"})
+
+        city = data.get('city')
+        if not isinstance(city, str) or not city:
+            raise serializers.ValidationError({"city": "City must be a non-empty string"})
+
+        latitude = data.get('latitude')
+        try:
+            latitude = Decimal(latitude)
+        except (ValueError, TypeError, InvalidOperation):
+            raise serializers.ValidationError({"latitude": "Latitude must be a valid number"})
+
+        longitude = data.get('longitude')
+        try:
+            longitude = Decimal(longitude)
+        except (ValueError, TypeError, InvalidOperation):
+            raise serializers.ValidationError({"longitude": "Longitude must be a valid number"})
+
+        place = f"{country}, {city}" 
+        return Places(place, latitude, longitude)
