@@ -94,6 +94,17 @@ class MyLocationModelSerializer(serializers.Serializer):
     location = PlaceSerializerField()
 ```
 
+How the location data is displayed when doing a GET request in JSON with a serializer that has the field included, and is also how the data should be provided when doing a PUT/PATCH/POST:
+
+```json
+"location": {
+    "city": "Stockholm",
+    "country": "Sverige",
+    "latitude": "59.32932349999999",
+    "longitude": "18.0685808"
+}
+```
+
 ## Demo
 ------
 
