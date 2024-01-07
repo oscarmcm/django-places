@@ -19,8 +19,8 @@ class PlacesSerializerField(serializers.Field):
             return None
 
         place_parts = value.place.split(', ')
-        country = place_parts[0] if len(place_parts) > 1 else ''
-        city = place_parts[1] if len(place_parts) > 1 else place_parts[0]
+        country = place_parts[1] if len(place_parts) > 1 else place_parts[0]
+        city = place_parts[0] if len(place_parts) > 1 else ''
 
         return {
             'country': country,
