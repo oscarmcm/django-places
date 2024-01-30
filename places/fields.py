@@ -24,7 +24,7 @@ class PlacesField(models.Field):
 
     def get_internal_type(self):
         return 'CharField'
-
+    
     def to_python(self, value):
         if not value or value == 'None' or value == '':
             return None
@@ -35,20 +35,22 @@ class PlacesField(models.Field):
         # Split the value into parts and strip spaces
         value_parts = [val.strip() for val in value.split(',')]
 
-        # Extract latitude and longitude
-        try:
-            latitude = Decimal(value_parts[-3])
-            longitude = Decimal(value_parts[-2])
-        except (IndexError, ValueError, decimal.InvalidOperation):
-            # Default values in case of error
-            latitude = Decimal('0.0')
-            longitude = Decimal('0.0')
+        # Initialize defaults
+        place, latitude, longitude, name, formatted_address = (None, Decimal('0.0'), Decimal('0.0'), None, None)
 
-        # Extract place and name
-        place = ','.join(value_parts[:-3]) if len(value_parts) > 3 else None
-        name = value_parts[-1] if len(value_parts) > 3 else None
+        # Assign values based on the expected format
+        if len(value_parts) >= 7:
+            place = ','.join(value_parts[:2])  # Country and City
+            try:
+                latitude = Decimal(value_parts[2])
+                longitude = Decimal(value_parts[3])
+            except (ValueError, decimal.InvalidOperation):
+                pass  # Keep default values if conversion fails
 
-        return Places(place, latitude, longitude, name)
+            name = value_parts[4]
+            formatted_address = ', '.join(value_parts[5:])  # Address Line 1 and Line 2
+
+        return Places(place, latitude, longitude, name, formatted_address)
 
 
     def from_db_value(self, value, expression, connection):

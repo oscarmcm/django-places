@@ -19,7 +19,7 @@ class PlacesSerializerField(serializers.Field):
         if not value.place:
             return None
 
-        place_parts = value.place.split(', ')
+        place_parts = value.place.split(',')
         country = place_parts[1] if len(place_parts) > 1 else place_parts[0]
         city = place_parts[0] if len(place_parts) > 1 else ''
 
@@ -63,4 +63,5 @@ class PlacesSerializerField(serializers.Field):
         formatted_address = data.get('formatted_address')
 
         place = f"{country}, {city}" 
+
         return Places(place, latitude, longitude, name, formatted_address)
