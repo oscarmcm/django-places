@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from decimal import Decimal
+import decimal
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _

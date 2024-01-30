@@ -25,7 +25,8 @@ class PlacesSerializerField(serializers.Field):
             'city': city,
             'latitude': str(value.latitude),
             'longitude': str(value.longitude),
-            'name': value.name
+            'name': value.name,
+            'formatted_address': value.formatted_address,
         }
 
     def to_internal_value(self, data):
@@ -56,6 +57,7 @@ class PlacesSerializerField(serializers.Field):
             raise serializers.ValidationError({"longitude": "Longitude must be a valid number"})
         
         name = data.get('name')
+        formatted_address = data.get('formatted_address')
 
         place = f"{country}, {city}" 
-        return Places(place, latitude, longitude, name)
+        return Places(place, latitude, longitude, name, formatted_address)
