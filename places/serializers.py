@@ -16,6 +16,9 @@ class PlacesSerializerField(serializers.Field):
         if not value or not isinstance(value, Places):
             return None
 
+        if not value.place:
+            return None
+
         place_parts = value.place.split(', ')
         country = place_parts[1] if len(place_parts) > 1 else place_parts[0]
         city = place_parts[0] if len(place_parts) > 1 else ''
