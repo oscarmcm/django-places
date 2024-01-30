@@ -36,7 +36,9 @@ class PlacesWidget(widgets.MultiWidget):
         if isinstance(value, str):
             return value.rsplit(',')
         if value:
-            return [value.place, value.latitude, value.longitude]
+            print('value from decompress', value)
+            place = f'{value.country}, {value.city}, {value.formatted_address}'
+            return [place, value.latitude, value.longitude]
         return [None, None]
 
     def get_context(self, name, value, attrs):

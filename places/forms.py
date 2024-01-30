@@ -11,6 +11,10 @@ class PlacesField(forms.MultiValueField):
     default_error_messages = {'invalid': _('Enter a valid geoposition.')}
 
     def __init__(self, *args, **kwargs):
+
+        kwargs.pop('encoder', None)
+        kwargs.pop('decoder', None)
+
         fields = (
             forms.CharField(label=_('place')),
             forms.DecimalField(label=_('Latitude')),

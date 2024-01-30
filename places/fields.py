@@ -1,11 +1,15 @@
+
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import json
 from decimal import Decimal
 import decimal
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.db.models import JSONField
+
 try:
     from django.utils.encoding import smart_text
 except ImportError:
@@ -15,49 +19,42 @@ from . import Places
 from .forms import PlacesField as PlacesFormField
 
 
-class PlacesField(models.Field):
+class PlacesField(JSONField):
     description = _('A geoposition field (latitude and longitude)')
 
     def __init__(self, *args, **kwargs):
-        kwargs['max_length'] = 255
         super(PlacesField, self).__init__(*args, **kwargs)
 
-    def get_internal_type(self):
-        return 'CharField'
-    
     def to_python(self, value):
-        if not value or value == 'None' or value == '':
-            return None
-
         if isinstance(value, Places):
             return value
 
-        # Split the value into parts and strip spaces
-        value_parts = [val.strip() for val in value.split(',')]
+        if value is None or isinstance(value, dict):
+            return value
 
-        # Initialize defaults
-        place, latitude, longitude, name, formatted_address = (None, Decimal('0.0'), Decimal('0.0'), None, None)
+        # Assuming the value is a string representation of a dict
+        # Convert it to a dict and then to a Places object
+        try:
+            value_dict = json.loads(value)
+            return Places.from_dict(value_dict)
+        except (ValueError, TypeError):
+            # In case the string cannot be converted to a dict
+            return None
 
-        # Assign values based on the expected format
-        if len(value_parts) >= 7:
-            place = ','.join(value_parts[:2])  # Country and City
-            try:
-                latitude = Decimal(value_parts[2])
-                longitude = Decimal(value_parts[3])
-            except (ValueError, decimal.InvalidOperation):
-                pass  # Keep default values if conversion fails
+    def get_prep_value(self, value):
+        if isinstance(value, Places):
+            return value.to_dict()
 
-            name = value_parts[4]
-            formatted_address = ', '.join(value_parts[5:])  # Address Line 1 and Line 2
+        # If the value is already a dict or None, just use it as-is
+        return value
 
-        return Places(place, latitude, longitude, name, formatted_address)
-
+    def from_db_value(self, value, expression, connection):
+        if value is None:
+            return value
+        return self.to_python(value)
 
     def from_db_value(self, value, expression, connection):
         return self.to_python(value)
-
-    def get_prep_value(self, value):
-        return str(value)
 
     def value_to_string(self, obj):
         value = self.value_from_object(obj)
