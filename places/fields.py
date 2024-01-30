@@ -31,27 +31,24 @@ class PlacesField(models.Field):
         if isinstance(value, Places):
             return value
 
-        if isinstance(value, list):
-            return Places(value[0], value[1], value[2])
+        # Split the value into parts and strip spaces
+        value_parts = [val.strip() for val in value.split(',')]
 
-        value_parts = [Decimal(val) for val in value.split(',')[-2:]]
-
+        # Extract latitude and longitude
         try:
-            latitude = value_parts[0]
-        except IndexError:
-            latitude = '0.0'
+            latitude = Decimal(value_parts[-3])
+            longitude = Decimal(value_parts[-2])
+        except (IndexError, ValueError, decimal.InvalidOperation):
+            # Default values in case of error
+            latitude = Decimal('0.0')
+            longitude = Decimal('0.0')
 
-        try:
-            longitude = value_parts[1]
-        except IndexError:
-            longitude = '0.0'
+        # Extract place and name
+        place = ','.join(value_parts[:-3]) if len(value_parts) > 3 else None
+        name = value_parts[-1] if len(value_parts) > 3 else None
 
-        try:
-            place = ','.join(value.split(',')[:-2])
-        except:
-            pass
+        return Places(place, latitude, longitude, name)
 
-        return Places(place, latitude, longitude)
 
     def from_db_value(self, value, expression, connection):
         return self.to_python(value)

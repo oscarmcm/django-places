@@ -8,7 +8,7 @@ __version__ = '5.2.1'
 
 
 class Places(object):
-    def __init__(self, place, latitude, longitude):
+    def __init__(self, place, latitude, longitude, name=None):
 
         if isinstance(latitude, float) or isinstance(latitude, int):
             latitude = str(latitude)
@@ -16,11 +16,12 @@ class Places(object):
             longitude = str(longitude)
 
         self.place = place
+        self.name = name 
         self.latitude = Decimal(latitude)
         self.longitude = Decimal(longitude)
 
     def __str__(self):
-        return "%s, %s, %s" % (self.place, self.latitude, self.longitude)
+        return "%s, %s, %s, %s" % (self.place, self.latitude, self.longitude, self.name)
 
     def __repr__(self):
         return "Places(%s)" % str(self)

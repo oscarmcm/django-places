@@ -1,7 +1,5 @@
-from decimal import Decimal, InvalidOperation
-
 from rest_framework import serializers
-
+from decimal import Decimal, InvalidOperation
 from . import Places
 
 class PlacesSerializerField(serializers.Field):
@@ -26,7 +24,8 @@ class PlacesSerializerField(serializers.Field):
             'country': country,
             'city': city,
             'latitude': str(value.latitude),
-            'longitude': str(value.longitude)
+            'longitude': str(value.longitude),
+            'name': value.name
         }
 
     def to_internal_value(self, data):
@@ -55,6 +54,8 @@ class PlacesSerializerField(serializers.Field):
             longitude = Decimal(longitude)
         except (ValueError, TypeError, InvalidOperation):
             raise serializers.ValidationError({"longitude": "Longitude must be a valid number"})
+        
+        name = data.get('name')
 
         place = f"{country}, {city}" 
-        return Places(place, latitude, longitude)
+        return Places(place, latitude, longitude, name)
