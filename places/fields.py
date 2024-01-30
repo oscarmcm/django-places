@@ -26,8 +26,13 @@ class PlacesField(JSONField):
         super(PlacesField, self).__init__(*args, **kwargs)
 
     def to_python(self, value):
+        print('value from to_python', value)
         if isinstance(value, Places):
             return value
+        
+        if isinstance(value, list):
+            if len(value) == 3:
+                print('value', value)
 
         if value is None or isinstance(value, dict):
             return value
