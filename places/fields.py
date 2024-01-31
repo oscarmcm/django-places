@@ -26,19 +26,33 @@ class PlacesField(JSONField):
         super(PlacesField, self).__init__(*args, **kwargs)
 
     def to_python(self, value):
-        print('value from to_python', value)
         if isinstance(value, Places):
             return value
-        
+
+        # Check if value is a string representation of a list
+        if isinstance(value, str):
+            try:
+                value = json.loads(value)
+            except (ValueError, TypeError):
+                pass  # If it's not a JSON string, proceed with the original value
+
         if isinstance(value, list):
-            if len(value) == 3:
-                print('value', value)
+            # Process list to create a Places object
+            if len(value) >= 8:
+                return Places(
+                    country=value[5],
+                    city=value[6],
+                    state=value[7],
+                    latitude=value[1],
+                    longitude=value[2],
+                    name=value[3],
+                    formatted_address=value[4]
+                )
 
         if value is None or isinstance(value, dict):
             return value
 
-        # Assuming the value is a string representation of a dict
-        # Convert it to a dict and then to a Places object
+        # Handle string representation of a dict
         try:
             value_dict = json.loads(value)
             return Places.from_dict(value_dict)
@@ -51,6 +65,9 @@ class PlacesField(JSONField):
             return value.to_dict()
 
         # If the value is already a dict or None, just use it as-is
+        return value
+    
+    def clean(self, value, model_instance):
         return value
 
     def from_db_value(self, value, expression, connection):

@@ -10,7 +10,12 @@ class PlacesSerializerField(serializers.Field):
     """
 
     def to_representation(self, obj):
-        return obj.to_dict() if obj else None
+        if isinstance(obj, Places):
+            return obj.to_dict()
+        elif isinstance(obj, dict):
+            return obj
+        else:
+            return None
     
     def to_internal_value(self, data):
         place_from_dict =  Places.from_dict(data)

@@ -11,8 +11,6 @@ class PlacesField(forms.MultiValueField):
     default_error_messages = {'invalid': _('Enter a valid geoposition.')}
 
     def __init__(self, *args, **kwargs):
-        print("Initializing PlacesField with args:", args, "kwargs:", kwargs)
-
         kwargs.pop('encoder', None)
         kwargs.pop('decoder', None)
 
@@ -37,13 +35,24 @@ class PlacesField(forms.MultiValueField):
         return {'class': ' '.join(classes)}
 
     def compress(self, value_list):
-        print("Compressing values in PlacesField:", value_list)
         if value_list:
-            return value_list
+            place = Places(
+                latitude=value_list[1],
+                longitude=value_list[2],
+                name=value_list[3],
+                formatted_address=value_list[4],
+                country=value_list[5],
+                city=value_list[6],
+                state=value_list[7],
+            )
+            return place
         return ""
+
+
+    def clean(self, value):
+        return value
     
     def prepare_value(self, value):
-        print("Preparing value in PlacesField:", value)
         if isinstance(value, Places):
             return value.to_dict()
         return value
