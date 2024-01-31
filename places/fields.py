@@ -1,10 +1,15 @@
+
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import json
 from decimal import Decimal
+import decimal
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.db.models import JSONField
+
 try:
     from django.utils.encoding import smart_text
 except ImportError:
@@ -14,50 +19,64 @@ from . import Places
 from .forms import PlacesField as PlacesFormField
 
 
-class PlacesField(models.Field):
+class PlacesField(JSONField):
     description = _('A geoposition field (latitude and longitude)')
 
     def __init__(self, *args, **kwargs):
-        kwargs['max_length'] = 255
         super(PlacesField, self).__init__(*args, **kwargs)
 
-    def get_internal_type(self):
-        return 'CharField'
-
     def to_python(self, value):
-        if not value or value == 'None' or value == '':
-            return None
-
         if isinstance(value, Places):
             return value
 
+        # Check if value is a string representation of a list
+        if isinstance(value, str):
+            try:
+                value = json.loads(value)
+            except (ValueError, TypeError):
+                pass  # If it's not a JSON string, proceed with the original value
+
         if isinstance(value, list):
-            return Places(value[0], value[1], value[2])
+            # Process list to create a Places object
+            if len(value) >= 8:
+                return Places(
+                    country=value[5],
+                    city=value[6],
+                    state=value[7],
+                    latitude=value[1],
+                    longitude=value[2],
+                    name=value[3],
+                    formatted_address=value[4]
+                )
 
-        value_parts = [Decimal(val) for val in value.split(',')[-2:]]
+        if value is None or isinstance(value, dict):
+            return value
 
+        # Handle string representation of a dict
         try:
-            latitude = value_parts[0]
-        except IndexError:
-            latitude = '0.0'
+            value_dict = json.loads(value)
+            return Places.from_dict(value_dict)
+        except (ValueError, TypeError):
+            # In case the string cannot be converted to a dict
+            return None
 
-        try:
-            longitude = value_parts[1]
-        except IndexError:
-            longitude = '0.0'
+    def get_prep_value(self, value):
+        if isinstance(value, Places):
+            return value.to_dict()
 
-        try:
-            place = ','.join(value.split(',')[:-2])
-        except:
-            pass
+        # If the value is already a dict or None, just use it as-is
+        return value
+    
+    def clean(self, value, model_instance):
+        return value
 
-        return Places(place, latitude, longitude)
+    def from_db_value(self, value, expression, connection):
+        if value is None:
+            return value
+        return self.to_python(value)
 
     def from_db_value(self, value, expression, connection):
         return self.to_python(value)
-
-    def get_prep_value(self, value):
-        return str(value)
 
     def value_to_string(self, obj):
         value = self.value_from_object(obj)

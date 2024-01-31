@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-
 from django.forms import widgets
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
 
 from .conf import settings
+from . import Places
 
 
 class PlacesWidget(widgets.MultiWidget):
@@ -29,6 +29,12 @@ class PlacesWidget(widgets.MultiWidget):
                     'placeholder': _('Longitude'),
                 }
             ),
+            widgets.TextInput(attrs={'placeholder': 'Name', 'id': 'id_location_name'}),
+            widgets.TextInput(attrs={'placeholder': 'Formatted Address', 'id': 'id_location_formatted_address'}),
+            widgets.TextInput(attrs={'placeholder': 'Country', 'id': 'id_location_country'}),
+            widgets.TextInput(attrs={'placeholder': 'City', 'id': 'id_location_city'}),
+            widgets.TextInput(attrs={'placeholder': 'State', 'id': 'id_location_state'}),
+            
         )
         super(PlacesWidget, self).__init__(_widgets, attrs)
 
@@ -36,7 +42,11 @@ class PlacesWidget(widgets.MultiWidget):
         if isinstance(value, str):
             return value.rsplit(',')
         if value:
-            return [value.place, value.latitude, value.longitude]
+            if isinstance(value, Places):
+                value = value.to_dict()
+            print('value from decompress', value)
+            place = f'{value["country"]}, {value["city"]}, {value["formatted_address"]}'
+            return [place, value["latitude"], value["longitude"], value["name"], value["formatted_address"], value["country"], value["city"], value["state"]]
         return [None, None]
 
     def get_context(self, name, value, attrs):

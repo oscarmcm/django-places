@@ -1,8 +1,14 @@
 function setupDjangoPlaces(mapConfig, markerConfig, childs) {
+  var searchBox = new google.maps.places.SearchBox(childs[0]);
   var latInput = childs[1];
   var lngInput = childs[2];
-  var searchBox = new google.maps.places.SearchBox(childs[0]);
-  var gmap = new google.maps.Map(childs[3], mapConfig);
+  var nameInput = childs[3];
+  var addressInput = childs[4];
+  var countryInput = childs[5];
+  var cityInput = childs[6];  
+  var stateInput = childs[7];
+  var gmap = new google.maps.Map(childs[8], mapConfig);
+
   var marker = new google.maps.Marker(markerConfig);
 
   if (latInput.value && lngInput.value) {
@@ -32,6 +38,30 @@ function setupDjangoPlaces(mapConfig, markerConfig, childs) {
       };
       marker.setPosition(place.geometry.location);
       marker.setMap(gmap);
+      console.log('place', place)
+
+
+      let country 
+      let city
+      let state
+
+      place.address_components.forEach(function(component) {
+        if (component.types.includes("country")) {
+          country = component.long_name;
+        }
+        if (component.types.includes("locality") || component.types.includes("postal_town")) {
+          city = component.long_name;
+        }
+        if (component.types.includes("administrative_area_level_1")) {
+          state = component.long_name;
+        }
+      });
+
+      nameInput.value = place.name;
+      addressInput.value = place.formatted_address;
+      countryInput.value = country;
+      cityInput.value = city;
+      stateInput.value = state;
       latInput.value = place.geometry.location.lat();
       lngInput.value = place.geometry.location.lng();
       gmap.setCenter(place.geometry.location);
